@@ -1,3 +1,809 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Calculator Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f0ff 0%, #e6f7ff 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .header h1 {
+            color: #8a2be2;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .header h1 i {
+            color: #ff69b4;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 900px;
+            height: 700px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .chat-container {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .message {
+            display: flex;
+            align-items: flex-start;
+            max-width: 85%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        
+        .bot-avatar {
+            background-color: #8a2be2;
+            color: white;
+        }
+        
+        .user-avatar {
+            background-color: #ff69b4;
+            color: white;
+        }
+        
+        .message-content {
+            margin: 0 15px;
+            padding: 15px 20px;
+            border-radius: 20px;
+            line-height: 1.5;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .bot-message .message-content {
+            background-color: #e6e6ff;
+            border-top-left-radius: 5px;
+            color: #333;
+        }
+        
+        .user-message .message-content {
+            background-color: #8a2be2;
+            color: white;
+            border-top-right-radius: 5px;
+        }
+        
+        .input-container {
+            padding: 20px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 15px;
+        }
+        
+        input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #8a2be2;
+        }
+        
+        button {
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button:hover {
+            background-color: #7a1bd2;
+            transform: scale(1.05);
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .option-btn {
+            background-color: white;
+            color: #8a2be2;
+            border: 2px solid #8a2be2;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option-btn:hover {
+            background-color: #8a2be2;
+            color: white;
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #ff69b4;
+        }
+        
+        .result-card h3 {
+            color: #8a2be2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            color: #8a2be2;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        
+        .footer a {
+            color: #8a2be2;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                height: 600px;
+            }
+            
+            .message {
+                max-width: 95%;
+            }
+            
+            .avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                height: 550px;
+            }
+            
+            .chat-container {
+                padding: 15px;
+            }
+            
+            .message-content {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .input-container {
+                padding: 15px;
+            }
+            
+            input {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            
+            button {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .loading span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #8a2be2;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        
+        .loading span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        
+        .loading span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+        
+        .date-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .date-input-container input {
+            border-radius: 10px;
+            width: 100%;
+        }
+        
+        .date-input-container button {
+            align-self: flex-start;
+            border-radius: 10px;
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-baby"></i> Pregnancy Calculator Chatbot <i class="fas fa-robot"></i></h1>
+        <p>Welcome! I'm here to help you track your pregnancy journey. Calculate your due date, check which trimester you're in, and get personalized pregnancy information.</p>
+    </div>
+    
+    <div class="container">
+        <div class="chat-container" id="chatContainer">-->
+            <!-- Chat messages will be dynamically added here -->
+            <!-- <div class="message bot-message">
+                <div class="avatar bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>Hello! 👋 I'm your Pregnancy Assistant. I can help you calculate your due date, determine which trimester you're in, and provide pregnancy information based on your last menstrual period (LMP).</p>
+                    <p>How can I help you today?</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption('calculate')">Calculate Due Date</button>
+                        <button class="option-btn" onclick="selectOption('trimester')">Check Trimester</button>
+                        <button class="option-btn" onclick="selectOption('info')">Get Pregnancy Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
+            <button id="sendBtn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p><strong>Note:</strong> This chatbot uses the Pregnancy Calculator API from RapidAPI. Please remember that this tool provides estimates and is not a substitute for professional medical advice. Always consult with your healthcare provider for accurate pregnancy information.</p>
+        <p>API Demo Mode: Using sample data as the API requires a RapidAPI key. <a href="https://rapidapi.com/divad12/api/pregnancy-calculator-api" target="_blank">Get your own API key</a> to enable full functionality.</p>
+    </div>
+
+    <script>
+        // DOM elements
+        const chatContainer = document.getElementById('chatContainer');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        
+        // State variables
+        let currentMode = '';
+        let lmpDate = '';
+        
+        // Function to add a message to the chat
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = `avatar ${isUser ? 'user-avatar' : 'bot-avatar'}`;
+            avatarDiv.innerHTML = `<i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i>`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = content;
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            chatContainer.appendChild(messageDiv);
+            
+            // Scroll to the bottom of the chat
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // Function to show loading indicator
+        function showLoading() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'avatar bot-avatar';
+            avatarDiv.innerHTML = '<i class="fas fa-robot"></i>';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = '<div class="loading"><span></span><span></span><span></span></div>';
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            return messageDiv;
+        }
+        
+        // Function to remove loading indicator
+        function removeLoading(loadingElement) {
+            if (loadingElement && loadingElement.parentNode) {
+                loadingElement.parentNode.removeChild(loadingElement);
+            }
+        }
+        
+        // Function to handle option selection
+        function selectOption(option) {
+            switch(option) {
+                case 'calculate':
+                    currentMode = 'calculate';
+                    addMessage("I'd like to calculate my due date.", true);
+                    askForLMP();
+                    break;
+                case 'trimester':
+                    currentMode = 'trimester';
+                    addMessage("I want to check which trimester I'm in.", true);
+                    askForLMP();
+                    break;
+                case 'info':
+                    currentMode = 'info';
+                    addMessage("I'd like to get pregnancy information.", true);
+                    askForLMP();
+                    break;
+            }
+        }
+        
+        // Function to ask for LMP date
+        function askForLMP() {
+            const content = `
+                <p>To calculate, I need to know the first day of your Last Menstrual Period (LMP).</p>
+                <div class="date-input-container">
+                    <label for="lmpDate">Please enter your LMP date:</label>
+                    <input type="date" id="lmpDate" value="${getDefaultLMP()}">
+                    <button class="option-btn" onclick="submitLMP()">Submit Date</button>
+                </div>
+                <p><em>Tip: Your LMP is typically the first day of your last period before you got pregnant.</em></p>
+            `;
+            
+            // Add a small delay for better UX
+            setTimeout(() => {
+                addMessage(content);
+            }, 500);
+        }
+        
+        // Function to get a default LMP date (approximately 3 months ago)
+        function getDefaultLMP() {
+            const today = new Date();
+            const threeMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
+            return threeMonthsAgo.toISOString().split('T')[0];
+        }
+        
+        // Function to submit LMP date
+        function submitLMP() {
+            const lmpInput = document.getElementById('lmpDate');
+            lmpDate = lmpInput.value;
+            
+            if (!lmpDate) {
+                addMessage("Please select a date.", true);
+                return;
+            }
+            
+            addMessage(`My LMP is ${formatDate(lmpDate)}.`, true);
+            
+            // Show loading
+            const loadingElement = showLoading();
+            
+            // Simulate API call with a timeout
+            setTimeout(() => {
+                removeLoading(loadingElement);
+                callPregnancyAPI();
+            }, 1500);
+        }
+        
+        // Function to format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+        
+        // Function to call the Pregnancy API (using mock data for demo)
+        function callPregnancyAPI() {
+            // For demo purposes, we'll use mock data since the API requires a RapidAPI key
+            // In a real implementation, you would use the actual API call
+            const mockData = generateMockData(lmpDate);
+            
+            let resultHTML = '';
+            
+            if (currentMode === 'calculate') {
+                resultHTML = `
+                    <div class="result-card">
+                        <h3><i class="fas fa-calendar-check"></i> Due Date Calculation</h3>
+                        <div class="result-item">
+                            <span class="result-label">Last Menstrual Period:</span>
+                            <span class="result-value">${formatDate(mockData.lmp)}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Estimated Due Date:</span>
+                            <span class="result-value">${formatDate(mockData.dueDate)}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Weeks Pregnant:</span>
+                            <span class="result-value">${mockData.weeksPregnant} weeks</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Days Pregnant:</span>
+                            <span class="result-value">${mockData.daysPregnant} days</span>
+                        </div>
+                    </div>
+                    <p>Your estimated due date is calculated as 280 days (40 weeks) from the first day of your last period.</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption('trimester')">Check Trimester</button>
+                        <button class="option-btn" onclick="selectOption('info')">Get Pregnancy Info</button>
+                        <button class="option-btn" onclick="resetChat()">Start Over</button>
+                    </div>
+                `;
+            } else if (currentMode === 'trimester') {
+                resultHTML = `
+                    <div class="result-card">
+                        <h3><i class="fas fa-chart-line"></i> Trimester Information</h3>
+                        <div class="result-item">
+                            <span class="result-label">Last Menstrual Period:</span>
+                            <span class="result-value">${formatDate(mockData.lmp)}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Current Trimester:</span>
+                            <span class="result-value">${mockData.trimester}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Weeks Pregnant:</span>
+                            <span class="result-value">${mockData.weeksPregnant} weeks</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Trimester Progress:</span>
+                            <span class="result-value">${mockData.trimesterProgress}%</span>
+                        </div>
+                    </div>
+                    <p>${getTrimesterInfo(mockData.trimester)}</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption('calculate')">Calculate Due Date</button>
+                        <button class="option-btn" onclick="selectOption('info')">Get Pregnancy Info</button>
+                        <button class="option-btn" onclick="resetChat()">Start Over</button>
+                    </div>
+                `;
+            } else if (currentMode === 'info') {
+                resultHTML = `
+                    <div class="result-card">
+                        <h3><i class="fas fa-info-circle"></i> Pregnancy Information</h3>
+                        <div class="result-item">
+                            <span class="result-label">Last Menstrual Period:</span>
+                            <span class="result-value">${formatDate(mockData.lmp)}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Weeks Pregnant:</span>
+                            <span class="result-value">${mockData.weeksPregnant} weeks</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Days Pregnant:</span>
+                            <span class="result-value">${mockData.daysPregnant} days</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Trimester:</span>
+                            <span class="result-value">${mockData.trimester}</span>
+                        </div>
+                    </div>
+                    <p><strong>Baby Development:</strong> At ${mockData.weeksPregnant} weeks, your baby is approximately ${mockData.babySize} long and weighs about ${mockData.babyWeight}. The baby's organs are continuing to develop and mature.</p>
+                    <p><strong>Mom's Changes:</strong> You might be experiencing ${mockData.symptoms}. Remember to stay hydrated, eat nutritious foods, and get plenty of rest.</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption('calculate')">Calculate Due Date</button>
+                        <button class="option-btn" onclick="selectOption('trimester')">Check Trimester</button>
+                        <button class="option-btn" onclick="resetChat()">Start Over</button>
+                    </div>
+                `;
+            }
+            
+            addMessage(resultHTML);
+        }
+        
+        // Function to generate mock data for demonstration
+        function generateMockData(lmp) {
+            const lmpDate = new Date(lmp);
+            const today = new Date();
+            
+            // Calculate days since LMP
+            const timeDiff = today.getTime() - lmpDate.getTime();
+            const daysPregnant = Math.floor(timeDiff / (1000 * 3600 * 24));
+            const weeksPregnant = Math.floor(daysPregnant / 7);
+            
+            // Calculate due date (40 weeks from LMP)
+            const dueDate = new Date(lmpDate);
+            dueDate.setDate(dueDate.getDate() + 280);
+            
+            // Determine trimester
+            let trimester = '';
+            let trimesterProgress = 0;
+            let babySize = '';
+            let babyWeight = '';
+            let symptoms = '';
+            
+            if (weeksPregnant < 13) {
+                trimester = 'First Trimester';
+                trimesterProgress = Math.min(100, Math.round((weeksPregnant / 13) * 100));
+                babySize = '2.5 inches';
+                babyWeight = '0.5 ounces';
+                symptoms = 'morning sickness, fatigue, and breast tenderness';
+            } else if (weeksPregnant < 27) {
+                trimester = 'Second Trimester';
+                trimesterProgress = Math.min(100, Math.round(((weeksPregnant - 13) / 14) * 100));
+                babySize = '14 inches';
+                babyWeight = '1.5 pounds';
+                symptoms = 'increased energy, feeling baby movements, and growing belly';
+            } else {
+                trimester = 'Third Trimester';
+                trimesterProgress = Math.min(100, Math.round(((weeksPregnant - 27) / 13) * 100));
+                babySize = '18-20 inches';
+                babyWeight = '6-9 pounds';
+                symptoms = 'backaches, heartburn, frequent urination, and Braxton Hicks contractions';
+            }
+            
+            return {
+                lmp: lmpDate.toISOString().split('T')[0],
+                dueDate: dueDate.toISOString().split('T')[0],
+                weeksPregnant: weeksPregnant,
+                daysPregnant: daysPregnant,
+                trimester: trimester,
+                trimesterProgress: trimesterProgress,
+                babySize: babySize,
+                babyWeight: babyWeight,
+                symptoms: symptoms
+            };
+        }
+        
+        // Function to get trimester-specific information
+        function getTrimesterInfo(trimester) {
+            switch(trimester) {
+                case 'First Trimester':
+                    return 'The first trimester (weeks 1-12) is a time of rapid development. Your baby\'s major organs and structures are forming. You might experience symptoms like morning sickness, fatigue, and breast tenderness.';
+                case 'Second Trimester':
+                    return 'The second trimester (weeks 13-26) is often called the "honeymoon period" of pregnancy. Many women feel more energetic and start showing. You\'ll likely feel your baby move for the first time during this trimester.';
+                case 'Third Trimester':
+                    return 'The third trimester (weeks 27-40) is the final stretch! Your baby is growing rapidly and gaining weight. You might experience more discomfort as your body prepares for birth.';
+                default:
+                    return 'Pregnancy is divided into three trimesters, each lasting about 12-14 weeks. Each trimester has its own developmental milestones and typical symptoms.';
+            }
+        }
+        
+        // Function to handle sending a message
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            userInput.value = '';
+            
+            // Show loading indicator
+            const loadingElement = showLoading();
+            
+            // Simulate bot response after a short delay
+            setTimeout(() => {
+                removeLoading(loadingElement);
+                
+                // Simple bot responses for general questions
+                const responses = [
+                    "I'm here to help with pregnancy calculations. Would you like to calculate your due date, check your trimester, or get pregnancy information?",
+                    "I specialize in pregnancy calculations using your last menstrual period. How can I assist you today?",
+                    "For accurate pregnancy information, I'll need to know the first day of your last menstrual period. What would you like to calculate?",
+                    "Pregnancy is an exciting journey! I can help you track your progress. Would you like to calculate your due date or check which trimester you're in?"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse);
+            }, 1000);
+        }
+        
+        // Function to handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Function to reset the chat
+        function resetChat() {
+            addMessage("Let's start over. What would you like to do?", true);
+            
+            setTimeout(() => {
+                currentMode = '';
+                lmpDate = '';
+                
+                addMessage(`
+                    <p>Hello again! How can I help you with your pregnancy calculations today?</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption('calculate')">Calculate Due Date</button>
+                        <button class="option-btn" onclick="selectOption('trimester')">Check Trimester</button>
+                        <button class="option-btn" onclick="selectOption('info')">Get Pregnancy Info</button>
+                    </div>
+                `);
+            }, 500);
+        }
+        
+        // Function to demonstrate the API call (commented out since it requires an API key)
+        function callRealAPI() {
+            
+            // This is the actual API call code (commented out as it requires a RapidAPI key)
+            const data = null;
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            
+            xhr.addEventListener('readystatechange', function () {
+                if (this.readyState === this.DONE) {
+                    console.log(this.responseText);
+                    // Process the API response here
+                    const response = JSON.parse(this.responseText);
+                    displayAPIResults(response);
+                }
+            });
+            
+            // Use the user's LMP date
+            xhr.open('GET', `https://pregnancy-calculator-api.p.rapidapi.com/trimester-calculator?lmp=${lmpDate}`);
+            xhr.setRequestHeader('x-rapidapi-host', 'pregnancy-calculator-api.p.rapidapi.com');
+            xhr.setRequestHeader('x-rapidapi-key', '854af63d17msh99df9ddb71ca82ep16c3abjsn05486a798792'); // You would need to add your API key
+            
+            xhr.send(data);
+            
+    
+            // For this demo, we'll use mock data instead
+            console.log("API call would be made with LMP:", lmpDate);
+            console.log("In a real implementation, you would need a RapidAPI key to access the pregnancy calculator API.");
+        }
+    </script>
+</body>
+</html> --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,50 +828,6 @@
             align-items: center;
             padding: 20px;
         }
-         .wave {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50vh;
-            z-index: -1;
-        }
-        
-        .wave path {
-            fill: #fd5ae2; 
-        }
-          .icons {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #fd5ae2;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-        }
-        .icon-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-          
-        .icon-container a {
-            color: #fff;
-            text-decoration: none;
-           
-        }
-        .icon-container img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-bottom: 5px;
-        }
-        .content {
-            padding: 50px;
-            text-align: center;
-        }
-    
         
         .header {
             text-align: center;
@@ -85,7 +847,7 @@
         }
         
         .header h1 i {
-            color: #fffbfd;
+            color: #ff69b4;
         }
         
         .header p {
@@ -177,7 +939,7 @@
         }
         
         .user-avatar {
-            background-color: #8a69ff;
+            background-color: #ff69b4;
             color: white;
         }
         
@@ -401,13 +1163,10 @@
     </style>
 </head>
 <body>
-    <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
-        <path d="M0,256L48,229.3C96,203,192,149,288,122.7C384,96,480,96,576,117.3C672,139,768,181,864,192C960,203,1056,181,1152,170.7C1248,160,1344,160,1392,160L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-    </svg>
     <div class="header">
         <h1><i class="fas fa-baby"></i> Pregnancy Calculator Chatbot <i class="fas fa-robot"></i></h1>
-        <p>Welcome! I'm here to help you check your due date, trimester and as your online Doctor, provide to you answers to your questions.</p>
-        <div id="apiStatus" class="api-status status-active">Little Nest</div>
+        <p>Welcome! I'm here to help you track your pregnancy journey using the actual RapidAPI.</p>
+        <div id="apiStatus" class="api-status status-active">API: Using Exact RapidAPI Code</div>
     </div>
     
     <div class="container">
@@ -417,12 +1176,12 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div class="message-content">
-                    <p>Hello Mother🤰, <strong></strong> </p>
+                    <p>Hello! 👋 I'm your Pregnancy Assistant using the <strong>exact RapidAPI code</strong> you provided.</p>
                     <p>How can I help you today?</p>
                     <div class="options">
-                        <button class="option-btn" onclick="selectOption('calculate')">Due Date</button>
+                        <button class="option-btn" onclick="selectOption('calculate')">Calculate Due Date</button>
                         <button class="option-btn" onclick="selectOption('trimester')">Check Trimester</button>
-                        <button class="option-btn" onclick="testDirectAPI()">Online Doctor</button>
+                        <button class="option-btn" onclick="testDirectAPI()">Test API Directly</button>
                     </div>
                 </div>
             </div>
@@ -438,7 +1197,7 @@
     </div>
     
     <div class="footer">
-        <p> ©  2025 LITTLE NEST</p>
+        <p><strong>Note:</strong> This chatbot uses the EXACT RapidAPI code from their website. If it still fails, the issue might be with the API key or subscription.</p>
     </div>
 
     <script>
@@ -504,7 +1263,7 @@
         
         // Function to test API directly (using EXACT RapidAPI code)
         function testDirectAPI() {
-            addMessage("Hello Doctor...", true);
+            addMessage("Testing API directly with RapidAPI's exact code...", true);
             
             const loadingElement = showLoading();
             
@@ -523,12 +1282,12 @@
                         const response = JSON.parse(this.responseText);
                         
                         if (this.status === 200) {
-                            apiStatus.textContent = "Working!";
-                            apiStatus.className = "Status-active";
+                            apiStatus.textContent = "API: Working!";
+                            apiStatus.className = "api-status status-active";
                             
                             addMessage(`
                                 <div class="result-card success-card">
-                                    <h3><i class="fas fa-check-circle"></i> Test Successful!</h3>
+                                    <h3><i class="fas fa-check-circle"></i> API Test Successful!</h3>
                                     <div class="result-item">
                                         <span class="result-label">Status:</span>
                                         <span class="result-value">${this.status} OK</span>
@@ -550,23 +1309,23 @@
                                         <span class="result-value">${response.trimester || 'N/A'}</span>
                                     </div>
                                 </div>
-                                <p> You can use the calculator features now.</p>
+                                <p>The API is working! Now you can use the calculator features.</p>
                             `);
                         } else {
                             throw new Error(`API returned status: ${this.status}`);
                         }
                     } catch (error) {
-                        apiStatus.textContent = "Error";
-                        apiStatus.className = "Network Error";
+                        apiStatus.textContent = "API: Error - Check Console";
+                        apiStatus.className = "api-status status-error";
                         
                         addMessage(`
                             <div class="result-card error-card">
-                                <h3><i class="fas fa-exclamation-triangle"></i> Oops!😣</h3>
+                                <h3><i class="fas fa-exclamation-triangle"></i> API Test Failed</h3>
                                 <p><strong>Status:</strong> ${this.status}</p>
                                 <p><strong>Response:</strong> ${this.responseText || 'No response'}</p>
-                                <p><strong>Error</strong> </p>
+                                <p><strong>Error:</strong> ${error.message}</p>
                             </div>
-                            
+                            <p>Check browser console (F12) for more details.</p>
                         `);
                     }
                 }
@@ -574,16 +1333,17 @@
             
             xhr.addEventListener('error', function() {
                 removeLoading(loadingElement);
-                apiStatus.textContent = " Network Error";
-                apiStatus.className = "error";
+                apiStatus.textContent = "API: Network Error";
+                apiStatus.className = "api-status status-error";
                 
                 addMessage(`
                     <div class="result-card error-card">
                         <h3><i class="fas fa-exclamation-triangle"></i> Network Error</h3>
-                        <p>Failed to connect to the Network. This could be due to:</p>
+                        <p>Failed to connect to the API. This could be due to:</p>
                         <ul>
-                            
+                            <li>CORS restrictions</li>
                             <li>Network issues</li>
+                            <li>API server down</li>
                         </ul>
                     </div>
                 `);
@@ -687,7 +1447,7 @@
                 addMessage(`
                     <div class="result-card error-card">
                         <h3><i class="fas fa-exclamation-triangle"></i> Network Error</h3>
-                        <p>Please wait...</p>
+                        <p>Could not connect to API. Using fallback calculation...</p>
                     </div>
                 `);
                 useFallbackCalculation(lmpDate);
@@ -759,7 +1519,7 @@
                     <button class="option-btn" onclick="selectOption('${currentMode === 'calculate' ? 'trimester' : 'calculate'}')">
                         ${currentMode === 'calculate' ? 'Check Trimester' : 'Calculate Due Date'}
                     </button>
-                    <button class="option-btn" onclick="resetChat()">Chatbot</button>
+                    <button class="option-btn" onclick="resetChat()">New Calculation</button>
                 </div>
             `;
             
@@ -828,7 +1588,7 @@
                     <button class="option-btn" onclick="selectOption('${currentMode === 'calculate' ? 'trimester' : 'calculate'}')">
                         ${currentMode === 'calculate' ? 'Check Trimester' : 'Calculate Due Date'}
                     </button>
-                    <button class="option-btn" onclick="resetChat()">chatbot</button>
+                    <button class="option-btn" onclick="resetChat()">New Calculation</button>
                 </div>
             `;
             
@@ -890,9 +1650,9 @@
             addMessage(`
                 <p>Hello again! How can I help you today?</p>
                 <div class="options">
-                    <button class="option-btn" onclick="selectOption('calculate')">Due Date</button>
+                    <button class="option-btn" onclick="selectOption('calculate')">Calculate Due Date</button>
                     <button class="option-btn" onclick="selectOption('trimester')">Check Trimester</button>
-                    <button class="option-btn" onclick="testDirectAPI()">Online Doctor</button>
+                    <button class="option-btn" onclick="testDirectAPI()">Test API Directly</button>
                 </div>
             `);
         }
@@ -913,31 +1673,10 @@
             if (event.key === 'Enter') {
                 sendMessage();
             }
-        } 
+        }
         
         // Initialize
         console.log("Using exact RapidAPI code with key:", API_KEY.substring(0, 10) + '...');
     </script>
-          
-    </div>
-         
-        <div class="icons">
-        <div class="icon-container">
-            <a href="new home.html"><img src="home.jpg" alt="Home"></a>
-            <a href="new home.html">Home</a>
-        </div>
-        <div class="icon-container">
-            <a href="New Tracker 1.html"><img src="tracker.jpg" alt="Fetus Tracker"></a>
-            <a href="New tracker 1.html">Fetus Tracker</a>
-        </div>
-         <div class="icon-container">
-            <a href="A&R.html"><img src="Advise.jpg" alt="Advise and Recommendation"></a>
-            <a href="A&R.html">Advise and Recommendation</a>
-        </div>
-        <div class="icon-container">
-            <a href="new user profile.html"><img src="profile.jpg" alt="User Profile"></a>
-            <a href="new user profile.html">Profile</a>
-        </div>
-    </div>
 </body>
-</html> 
+</html>

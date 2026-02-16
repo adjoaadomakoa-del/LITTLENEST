@@ -1,3 +1,639 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        .wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+        }
+        
+        .wave path {
+            fill:#fd5ae2; 
+        }
+        .login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: cornsilk;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            text-align: center;
+            
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .input-group input {
+            width: 90%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+        button[type="Login"] {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            
+            background-color:#fd5ae2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="Login"]:hover {
+            background-color: #fd5ae2;
+        }
+    </style>
+</head>
+<body>
+    <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path d="M0,256L48,229.3C96,203,192,149,288,122.7C384,96,480,96,576,117.3C672,139,768,181,864,192C960,203,1056,181,1152,170.7C1248,160,1344,160,1392,160L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+    </svg>
+    <div class="login-container">
+        <h2>Log In</h2>
+        <h4>Welcome Back!</h4>
+        <form>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="Login">Login</button>
+        </div>
+          <p class="Sign up-text"> Don't have an Account? <a href="sign in page.html">Sign up</a></p>
+        </form>
+    </div>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy App - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f0ff 0%, #e6f7ff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 40px 30px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #8a2be2;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .logo h1 i {
+            color: #ff69b4;
+        }
+        
+        .logo p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #8a2be2;
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+        }
+        
+        .input-group input.error {
+            border-color: #ff3333;
+        }
+        
+        .error-message {
+            color: #ff3333;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #8a2be2 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(138, 43, 226, 0.3);
+        }
+        
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+        
+        .signup-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .signup-text a {
+            color: #8a2be2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .demo-account {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #8a2be2;
+        }
+        
+        .demo-account h3 {
+            color: #8a2be2;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .demo-account p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #8a2be2;
+        }
+        
+        .forgot-password {
+            color: #8a2be2;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #28a745;
+        }
+        
+        .error-message-main {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #dc3545;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1><i class="fas fa-baby"></i> Pregnancy App</h1>
+            <p>Your personal pregnancy companion</p>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i> Login successful! Redirecting...
+        </div>
+        
+        <div class="error-message-main" id="errorMessageMain">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username"><i class="fas fa-user"></i> Username</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username">
+                <div class="error-message" id="usernameError">Please enter a valid username</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+                <div class="error-message" id="passwordError">Please enter your password</div>
+            </div>
+            
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password" onclick="forgotPassword()">Forgot password?</a>
+            </div>
+            
+            <button type="submit" id="loginButton">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+        
+        <div class="demo-account">
+            <h3><i class="fas fa-info-circle"></i> Demo Account</h3>
+            <p><strong>Username:</strong> demo@mother.com</p>
+            <p><strong>Password:</strong> pregnancy123</p>
+        </div>
+        
+        <p class="signup-text">
+            Don't have an Account? <a href="sign in page.html">Sign up</a>
+        </p>
+    </div>
+
+    <script>
+        // Initialize storage with default demo account if empty
+        function initializeStorage() {
+            if (!localStorage.getItem('users')) {
+                const defaultUsers = [
+                    {
+                        id: 1,
+                        username: 'demo@mother.com',
+                        password: 'pregnancy123',
+                        email: 'demo@mother.com',
+                        fullName: 'Demo Mother',
+                        dueDate: '2024-12-25',
+                        lmpDate: '2024-03-20',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                localStorage.setItem('users', JSON.stringify(defaultUsers));
+            }
+            
+            // Initialize current user session
+            if (!localStorage.getItem('currentUser')) {
+                localStorage.setItem('currentUser', JSON.stringify(null));
+            }
+            
+            // Check if user wants to be remembered
+            const rememberedUser = localStorage.getItem('rememberedUser');
+            if (rememberedUser) {
+                const user = JSON.parse(rememberedUser);
+                document.getElementById('username').value = user.username;
+                document.getElementById('rememberMe').checked = true;
+            }
+        }
+        
+        // Validate login form
+        function validateForm() {
+            let isValid = true;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            // Reset error states
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('username').classList.remove('error');
+            document.getElementById('password').classList.remove('error');
+            
+            // Validate username
+            if (!username) {
+                document.getElementById('usernameError').textContent = 'Please enter your username';
+                document.getElementById('usernameError').style.display = 'block';
+                document.getElementById('username').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'Please enter your password';
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('password').classList.add('error');
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('password').classList.add('error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // Handle login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Find user
+            const user = users.find(u => 
+                (u.username === username || u.email === username) && 
+                u.password === password
+            );
+            
+            if (user) {
+                // Store current user session
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Remember user if checkbox is checked
+                if (rememberMe) {
+                    localStorage.setItem('rememberedUser', JSON.stringify({
+                        username: user.username,
+                        email: user.email
+                    }));
+                } else {
+                    localStorage.removeItem('rememberedUser');
+                }
+                
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                
+                // Hide error message if shown
+                document.getElementById('errorMessageMain').style.display = 'none';
+                
+                // Disable login button
+                const loginButton = document.getElementById('loginButton');
+                loginButton.disabled = true;
+                loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+                
+                // Redirect after 1.5 seconds
+                setTimeout(() => {
+                    // Redirect to homepage or dashboard
+                    window.location.href = 'new home.html';
+                }, 1500);
+                
+            } else {
+                // Show error message
+                const errorMessage = document.getElementById('errorMessageMain');
+                const errorText = document.getElementById('errorText');
+                errorText.textContent = 'Invalid username or password. Please try again.';
+                errorMessage.style.display = 'block';
+                
+                // Hide success message if shown
+                document.getElementById('successMessage').style.display = 'none';
+                
+                // Clear password field
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        }
+        
+        // Forgot password function
+        function forgotPassword() {
+            const username = document.getElementById('username').value.trim();
+            
+            if (!username) {
+                alert('Please enter your username/email to reset your password');
+                document.getElementById('username').focus();
+                return;
+            }
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === username || u.email === username);
+            
+            if (user) {
+                alert(`Password reset instructions have been sent to ${user.email}. For this demo, your password is: ${user.password}`);
+            } else {
+                alert('No account found with that username/email. Please try again.');
+            }
+        }
+        
+        // Check if user is already logged in
+        function checkExistingSession() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                // Auto-redirect if already logged in
+                const confirmRedirect = confirm(`Welcome back ${currentUser.fullName}! Would you like to go to the homepage?`);
+                if (confirmRedirect) {
+                    window.location.href = 'new home.html';
+                } else {
+                    // Clear session if user wants to log in as someone else
+                    localStorage.removeItem('currentUser');
+                }
+            }
+        }
+        
+        // Logout function (to be used on other pages)
+        function logout() {
+            localStorage.removeItem('currentUser');
+            alert('You have been logged out successfully.');
+            window.location.href = 'login.html';
+        }
+        
+        // Get current user info (to be used on other pages)
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('currentUser'));
+        }
+        
+        // Update user data (to be used on profile page)
+        function updateUserData(updatedUser) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const index = users.findIndex(u => u.id === updatedUser.id);
+            
+            if (index !== -1) {
+                users[index] = updatedUser;
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                return true;
+            }
+            return false;
+        }
+        
+        // Register new user (for signup page)
+        function registerUser(userData) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Check if user already exists
+            const existingUser = users.find(u => 
+                u.username === userData.username || u.email === userData.email
+            );
+            
+            if (existingUser) {
+                return { success: false, message: 'Username or email already exists' };
+            }
+            
+            // Generate unique ID
+            const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+            
+            const newUser = {
+                id: newId,
+                username: userData.username,
+                password: userData.password,
+                email: userData.email,
+                fullName: userData.fullName,
+                dueDate: userData.dueDate || '',
+                lmpDate: userData.lmpDate || '',
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            return { success: true, user: newUser };
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStorage();
+            checkExistingSession();
+            
+            // Attach form submit event
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            
+            // Add input event listeners for real-time validation
+            document.getElementById('username').addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('error');
+                    document.getElementById('usernameError').style.display = 'none';
+                }
+            });
+            
+            document.getElementById('password').addEventListener('input', function() {
+                if (this.value.trim() && this.value.length >= 6) {
+                    this.classList.remove('error');
+                    document.getElementById('passwordError').style.display = 'none';
+                }
+            });
+            
+            // Enter key to submit
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+</body>
+</html> -->
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -311,7 +947,12 @@
             </button>
         </form>
         
-    
+        <div class="demo-account">
+            <h3><i class="fas fa-info-circle"></i> Pregnancy Account</h3>
+            <p><strong>Username:</strong> Jessica</p>
+            <p><strong>Email:</strong> adjoaadomakoa@gmail.com</p>
+           
+        </div>
         
         <p class="signup-text">
             Don't have an Account? <a href="sign in page.html">Sign up</a>
@@ -325,12 +966,12 @@
                 const defaultUsers = [
                     {
                         id: 1,
-                        username: 'demo',
-                        email: 'demo@mother.com',
-                        password: 'pregnancy123',
-                        firstName: 'Demo',
-                        lastName: 'Mother',
-                        fullName: 'Demo Mother',
+                        username: 'Jessica',
+                        email: 'adjoaadomakoa@gmail.com',
+                   
+                        firstName: 'Jessica',
+                        lastName: 'Opoku',
+                        fullName: 'Jessica Opoku',
                         createdAt: new Date().toISOString(),
                         lastLogin: new Date().toISOString()
                     }
@@ -470,9 +1111,9 @@
                 loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
                 
                 // Redirect after 1.5 seconds
-                setTimeout(() => {
+                {
                     window.location.href = 'new home.html';
-                }, 1500);
+                };
                 
             } else {
                 // Show error message
@@ -574,7 +1215,7 @@
                 setTimeout(() => {
                     window.location.href = 'Login.html';
                 }, 1500);
-            } 
+            }
         };
     </script>
 </body>
